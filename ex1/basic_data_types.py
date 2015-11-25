@@ -32,7 +32,7 @@ Basic examples about creation of variables with different data types
 
 
 # define a string variable named a with the value 'my first string'
-
+a = 'my first string'
 
 # define two variables width and height with values 23.5 and 18.2
 
