@@ -37,6 +37,12 @@ Module for testing exception handling
 # Use the function search_n from the functions module inside a new function
 # also named search_n. The function should do the same as functions.search_n
 # but if the variable is not found in the list then raise a ValueError.
+def search_n(l,x):
+    if x in l:
+        r = l.index(x)
+        return r,l[r]
+    raise ValueError
+
 
 
 ########################

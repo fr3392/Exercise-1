@@ -144,8 +144,8 @@ def args_to_dict(a,b,c):
 
 # Define a function named lists_to_dict that takes two lists of equal lenght
 # named keys and values and builds a dictionary out of them.
-def lists_to_dict(l,k):
-    d = {l:k}
+def lists_to_dict(keys,values):
+    d = dict(zip(keys,values))
     return d
 
 # Define a function named search_list that takes two lists a and b. The
@@ -153,12 +153,30 @@ def lists_to_dict(l,k):
 # a dictionary containing the index of the found element of b in list a and the
 # value of the found element. If nothing was found then return an empty
 # dictionary.
+def search_list(a,b):
+    result = {}
+    for i in range(0,len(b)):
+        r = search_n(a,b[i])
+        if r[0] != None:
+            temp = {r[0]:r[1]}
+            result.update(temp)
+    return result
 
 # Define a function named dict_to_string that takes a dictionary and a
 # separator string. The function should only take elements out of the
 # dictionary whose value is a string and then return a single string containing
 # the strings stored in the dictionary seperated by the separator string.
 # Return an empty string if there are no strings in the dictionary.
+def dict_to_string(d,s):
+        new = list(d.values())
+        c = 1
+        for i in range(0, len(new)):
+            if c == 1 and type(new[i]) == str:
+                string = new[i] + s
+                c = 0
+            elif c == 0 and type(new[i]) == str:
+                string = string + new[i] + s
+        return string
 
 # Define a function named classify_by_type which takes a list l and returns a
 # dictionary d. The d must have the keys 'int' and 'str' which contain the
