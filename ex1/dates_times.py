@@ -24,7 +24,7 @@
 # LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
 
 '''
 Exercises for using the datetime and the calendar module
@@ -53,5 +53,13 @@ def feed_the_gremlin(time):
 # "01 days, 01 minutes, 01 seconds until 2000-12-31 15:59:59"
 # If ref is before dt then use 'since' instead of 'until'
 def how_long(dt,ref):
-    diff = dt - ref
-    result = str(diff.days) + ' days, ' + str(diff.minutes) + ' minutes, ' + str(diff.seconds) + ' seceonds until ' + str(ref)
+    if dt < ref:
+        diff = ref - dt
+        con = 'until'
+    elif ref < dt:
+        diff = dt - ref
+        con = 'since'
+    minutes = int(diff.seconds/60)
+    sec = round((diff.seconds/60 - int(diff.seconds/60))*60)
+    result = str(diff.days) + ' days, ' + str(minutes) + ' minutes, ' + str(sec) + ' seconds ' + con + ' ' + str(ref)
+    return result
