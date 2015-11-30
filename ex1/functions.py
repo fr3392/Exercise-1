@@ -104,17 +104,17 @@ def check_list_nth(l,num,nth):
 # second variable x to add to the list. Return a new list containing x as the
 # last element without modifying the original list.
 def add_new_list(l,x):
-    l.append(x)
-    return l
+    newl = l.copy()
+    newl.append(x)
+    return newl
 
 # Define a function named remove_nth that takes a list and removes every nth
 # element (including the first one). Use a keyword named nth to set the default
 # value for nth to 2.
-def remove_nth(l, nth):
-    new = l
-    for i in range(0,len(l),nth):
-        del new[i]
-    return new
+def remove_nth(l, nth=2):
+    newl = l.copy()
+    del newl[0::nth]
+    return newl
 
 # Define a function named search_n that takes a list and a variable x and
 # searches for x in the list. If the variable is found return the index of the
@@ -136,12 +136,19 @@ def search_n(l,x):
 # dictionary with the position of the argument as the key (starting at 0) and
 # the argument as the value.
 def args_to_dict(a,b,c):
-    d = {'0': a,'1': b,'2': c}
+    d = {0 : a,1 : b,2 : c}
     return d
 
 # BONUS: Write a function named args_to_dict_general that does the same for any
 # number of arguments
 
+def args_to_dict_general(*a):
+    result = {}
+    i = 0
+    for b in a:
+        result[i] = b
+        i = i+1
+    return result
 # Define a function named lists_to_dict that takes two lists of equal lenght
 # named keys and values and builds a dictionary out of them.
 def lists_to_dict(keys,values):
@@ -168,17 +175,26 @@ def search_list(a,b):
 # the strings stored in the dictionary seperated by the separator string.
 # Return an empty string if there are no strings in the dictionary.
 def dict_to_string(d,s):
-        new = list(d.values())
-        c = 1
-        for i in range(0, len(new)):
-            if c == 1 and type(new[i]) == str:
-                string = new[i] + s
-                c = 0
-            elif c == 0 and type(new[i]) == str:
-                string = string + new[i] + s
-        return string
+    result = ''
+    for val in d.values():
+        if isinstance(val, str):
+            result = result + val + s
+    return result[:-1]
 
 # Define a function named classify_by_type which takes a list l and returns a
 # dictionary d. The d must have the keys 'int' and 'str' which contain the
 # elements out of l that have this type. Elements that do not fit one of these
 # two types should be stored in a list under the key 'others'
+def classify_by_type(l):
+    a = []
+    b = []
+    c = []
+    for x in l:
+        if isinstance(x, int):
+            a.append(x)
+        elif isinstance(x, str):
+            b.append(x)
+        else:
+            c.append(x)
+    d = {'int': a, 'str': b, 'others': c}
+    return d
